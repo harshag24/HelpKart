@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.*;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     DatabaseReference databaseReference;
     FirebaseUser user;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(MainActivity.this, "Client doesn't have permission to read from that database reference.", Toast.LENGTH_LONG).show();
             }
         });
 

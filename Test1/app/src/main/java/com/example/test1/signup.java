@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.*;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,13 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
 
 public class signup extends AppCompatActivity {
     private static final String TAG = "Msg:";
@@ -47,10 +37,10 @@ public class signup extends AppCompatActivity {
         pass = findViewById(R.id.editText_pass);
         email = findViewById(R.id.editText_email);
         phone = findViewById(R.id.editText_phone);
-
-
-
         mAuth = FirebaseAuth.getInstance();
+
+
+
         signup2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +89,6 @@ public class signup extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         UserInfoOnLoginPage userInfoOnLoginPage = new UserInfoOnLoginPage(nameInput,phoneInput);
-
         databaseReference.child(user.getUid()).setValue(userInfoOnLoginPage);
     }
 
