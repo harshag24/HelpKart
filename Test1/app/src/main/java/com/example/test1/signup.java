@@ -40,7 +40,6 @@ public class signup extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
         signup2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("Name", name);
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
+                finish();
                 startActivity(intent);
             }
 

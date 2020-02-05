@@ -26,4 +26,5 @@ public class upload_Clothes_page extends AppCompatActivity {
     });
 
     }
+
 }
