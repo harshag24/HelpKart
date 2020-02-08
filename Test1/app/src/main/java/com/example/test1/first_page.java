@@ -13,10 +13,11 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class first_page extends AppCompatActivity {
 
-    Button buyrent, doantebutt, sellbut;
+    Button buyrent, doantebutt, sellbut , logout;
     TextView namedisp;
     private AdView mAdView;
 
@@ -31,7 +32,7 @@ public class first_page extends AppCompatActivity {
         doantebutt = findViewById(R.id.donatebutton);
         sellbut = findViewById(R.id.buttonsell);
         namedisp = findViewById(R.id.namedisplay);
-
+        logout = findViewById(R.id.logout_button);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -51,6 +52,18 @@ public class first_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(first_page.this, Sell_clothes_page.class);
+                startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(first_page.this , MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finish();
                 startActivity(intent);
             }
         });
