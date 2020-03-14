@@ -55,7 +55,7 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="36dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Donate to needy" />
+        android:text="Donate " />
 
     <Button
         android:id="@+id/buttonsell"

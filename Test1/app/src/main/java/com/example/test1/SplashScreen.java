@@ -17,9 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class SplashScreen extends AppCompatActivity {
-private static int SPLASH_TIME_OUT = 2500;
-FirebaseUser firebaseUser;
+    FirebaseUser firebaseUser;
 DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ DatabaseReference databaseReference;
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        int SPLASH_TIME_OUT = 1500;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +43,7 @@ DatabaseReference databaseReference;
                     startActivity(intent);
                 }
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 
     public void getUserName() {
@@ -50,7 +52,7 @@ DatabaseReference databaseReference;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("name").getValue().toString();
+                String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
                 Intent intent = new Intent(SplashScreen.this, first_page.class);
                 intent.putExtra("Name", name);
                 finish();

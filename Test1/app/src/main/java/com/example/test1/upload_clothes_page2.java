@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -18,9 +19,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,6 +39,9 @@ public class upload_clothes_page2 extends AppCompatActivity {
     ProgressDialog progressDialog;
     StorageReference mStorageRef;
     Uri selectedImage;
+    FirebaseUser user;
+    DatabaseReference databaseReference  , databaseReference1;
+    StorageReference Ref , Ref1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +93,14 @@ public class upload_clothes_page2 extends AppCompatActivity {
 
     public void Fileuploader()
     {
-StorageReference Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExtension(selectedImage));
+        final int[] c = {0};
+        Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExtension(selectedImage));
         Ref.putFile(selectedImage)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(upload_clothes_page2.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
+                        addSeller();
                         progressDialog.dismiss();
                         finish();
                     }
@@ -101,5 +111,36 @@ StorageReference Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExten
                         Toast.makeText(upload_clothes_page2.this,"Upload Unsuccessful!! Please Try Again ",Toast.LENGTH_LONG).show();
                     }
                 });
+
     }
+
+    public void addSeller()
+    {
+        Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(final Uri uri) {
+                Log.e("TAG", String.valueOf(uri));
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String phone = dataSnapshot.child("phone_no").getValue().toString();
+                        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Seller");
+                        String url = String.valueOf(uri);
+                        UserInfoOnLoginPage userInfoOnLoginPage = new UserInfoOnLoginPage(name,phone,url);
+                        databaseReference1.child(user.getUid()).setValue(userInfoOnLoginPage);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        System.out.println("User Transaction Cancelled");
+                    }
+                });
+
+            }
+        });
+
+}
 }
