@@ -87,14 +87,13 @@ public class signup extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        UserInfoOnLoginPage userInfoOnLoginPage = new UserInfoOnLoginPage(nameInput,phoneInput);
-        databaseReference.child(user.getUid()).setValue(userInfoOnLoginPage);
+        Model_Class modelClass = new Model_Class(nameInput,phoneInput);
+        databaseReference.child(user.getUid()).setValue(modelClass);
     }
 
 
     public void openhomepage() {
         final Intent intent = new Intent(signup.this, first_page.class);
-        intent.putExtra("Name", nameInput);
         finish();
         startActivity(intent);
     }

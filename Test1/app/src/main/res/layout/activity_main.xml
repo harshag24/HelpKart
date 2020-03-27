@@ -70,4 +70,16 @@
         android:drawableRight="@drawable/ic_action_newuser"
         android:text="New User"
         android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/forget_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonLogin"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="48dp"
+        android:text="Forget Password ?"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 </RelativeLayout>

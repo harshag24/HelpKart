@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     DatabaseReference databaseReference;
     FirebaseUser user;
+    TextView forget_pass;
 
     @Override
     protected void onStart() {
@@ -55,13 +56,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-
         progressDialog = new ProgressDialog(this);
         username = findViewById(R.id.Username_editText);
         passw = findViewById(R.id.Pass_editText);
         login = findViewById(R.id.buttonLogin);
         signup = findViewById(R.id.buttonSignUp);
-
+        forget_pass = findViewById(R.id.forget_pass);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, signup.class);
                 startActivity(intent);
+            }
+        });
+
+        forget_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset_pass_dialog exampleDialog = new reset_pass_dialog();
+                exampleDialog.show(getSupportFragmentManager(), "reset dialog");
+                //Toast.makeText(MainActivity.this , "Reset link sent!!" , Toast.LENGTH_SHORT);
             }
         });
     }
@@ -125,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 Intent intent = new Intent(MainActivity.this, first_page.class);
-                intent.putExtra("Name", name);
+
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                 finish();

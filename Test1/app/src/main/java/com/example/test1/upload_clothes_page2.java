@@ -21,16 +21,18 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
+import java.util.Objects;
 
 public class upload_clothes_page2 extends AppCompatActivity {
 
@@ -41,18 +43,25 @@ public class upload_clothes_page2 extends AppCompatActivity {
     Uri selectedImage;
     FirebaseUser user;
     DatabaseReference databaseReference  , databaseReference1;
-    StorageReference Ref , Ref1;
-
+    StorageReference Ref;
+    String Brand , Desc , timeUsed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_clothes_page2);
-        mStorageRef= FirebaseStorage.getInstance().getReference("Images");
 
+        Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
+        Brand =  bundle.getString("Brand");
+        Desc = bundle.getString("Desc");
+        timeUsed = bundle.getString("timeUsed");
+
+        mStorageRef= FirebaseStorage.getInstance().getReference("Images");
         progressDialog = new ProgressDialog(this);
         selectedpic = findViewById(R.id.selectedpic_imageview);
         choosepic = findViewById(R.id.selectpic_button);
         next = findViewById(R.id.nextTopage3_button);
+
         mStorageRef=FirebaseStorage.getInstance().getReference();
         choosepic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +102,6 @@ public class upload_clothes_page2 extends AppCompatActivity {
 
     public void Fileuploader()
     {
-        final int[] c = {0};
         Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExtension(selectedImage));
         Ref.putFile(selectedImage)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -102,7 +110,11 @@ public class upload_clothes_page2 extends AppCompatActivity {
                         Toast.makeText(upload_clothes_page2.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
                         addSeller();
                         progressDialog.dismiss();
+                        Intent intent = new Intent(upload_clothes_page2.this , first_page.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
                         finish();
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -119,20 +131,19 @@ public class upload_clothes_page2 extends AppCompatActivity {
         Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(final Uri uri) {
-                Log.e("TAG", String.valueOf(uri));
+                Log.d("TAG", String.valueOf(uri));
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String phone = dataSnapshot.child("phone_no").getValue().toString();
+                        String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString().trim();
+                        String phone = Objects.requireNonNull(dataSnapshot.child("phone_no").getValue()).toString().trim();
                         databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Seller");
                         String url = String.valueOf(uri);
-                        UserInfoOnLoginPage userInfoOnLoginPage = new UserInfoOnLoginPage(name,phone,url);
-                        databaseReference1.child(user.getUid()).setValue(userInfoOnLoginPage);
+                        Model_Class modelClass = new Model_Class(name,phone,Brand,timeUsed,Desc,url);
+                        databaseReference1.child(user.getUid()).setValue(modelClass);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         System.out.println("User Transaction Cancelled");

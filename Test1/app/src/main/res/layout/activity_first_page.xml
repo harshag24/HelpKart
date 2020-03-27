@@ -34,6 +34,7 @@
 
     <TextView
         android:id="@+id/namedisplay"
+        android:text="username"
         android:layout_width="232dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/logo"
@@ -64,9 +65,9 @@
         android:layout_above="@+id/logout_button"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/holo_blue_light"
         android:text="Want to Sell?" />
 
@@ -90,9 +91,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="109dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="55dp"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-8289310155715439/1097496429"></com.google.android.gms.ads.AdView>
 
@@ -100,12 +101,25 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="Logout" />
+
+    <Button
+        android:id="@+id/profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/adView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Logout" />
+        android:text="Profile" />
 </RelativeLayout>

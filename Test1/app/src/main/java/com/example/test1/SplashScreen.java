@@ -31,7 +31,7 @@ DatabaseReference databaseReference;
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        int SPLASH_TIME_OUT = 1500;
+        int SPLASH_TIME_OUT = 500;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
