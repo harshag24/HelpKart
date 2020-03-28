@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdRequest.Builder;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -28,16 +30,20 @@ public class first_page extends AppCompatActivity {
 
     Button buyrent, doantebutt, logout ;
     TextView namedisp;
-    private AdView mAdView;
     FirebaseUser user;
     DatabaseReference databaseReference;
     BottomNavigationView navigation;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
+
         mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         buyrent = findViewById(R.id.rentbutton);
         doantebutt = findViewById(R.id.donatebutton);
 
@@ -63,8 +69,7 @@ public class first_page extends AppCompatActivity {
             }
         });
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
         buyrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,5 +119,6 @@ public class first_page extends AppCompatActivity {
             return false;
         }
     };
+
 
 }
