@@ -47,6 +47,7 @@
             android:textColor="#000"
             android:textSize="22sp"
             />
+
         <TextView
             android:id="@+id/timeUsed_seller"
             android:layout_width="wrap_content"

@@ -59,12 +59,13 @@ public class Profile extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String username = dataSnapshot.child("name").getValue().toString();
-                String userphone = dataSnapshot.child("phone_no").getValue().toString();
+                String username = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+                String userphone = Objects.requireNonNull(dataSnapshot.child("phone_no").getValue()).toString();
                 String useremail = user.getEmail();
                 name.setText(username);
                 email.setText(useremail);
                 phone.setText(userphone);
+
             }
 
             @Override
@@ -152,7 +153,7 @@ public class Profile extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.bottomnav_home:
-                    Intent intent = new Intent(Profile.this , first_page.class);
+                    Intent intent = new Intent(Profile.this , Home_Page.class);
                     finish();
                     startActivity(intent);
                     break;

@@ -3,10 +3,14 @@ package com.example.test1;
 
 public class Model_Class
 {
-    private String name , phone_no , Brand , timeUsed , Desc , url;
+    private String name , phone_no , Brand , timeUsed , Desc , url , email;
 
     Model_Class()
     {
+    }
+
+    public Model_Class(String email) {
+        this.email = email;
     }
 
     Model_Class(String name, String phone_no, String Brand, String timeUsed, String Desc, String url)
@@ -21,19 +25,28 @@ public class Model_Class
     { this.name = name;
     this.phone_no = phone_no; }
 
-    public String getBrand() { return Brand; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    String getBrand() { return Brand; }
 
     public void setBrand(String Brand) { this.Brand = Brand; }
 
-    public String getTimeUsed() { return timeUsed; }
+    String getTimeUsed() { return timeUsed; }
 
     public void setTimeUsed(String timeUsed) { this.timeUsed = timeUsed; }
 
-    public String getUrl() { return url; }
+   String getUrl() { return url; }
 
     public void setUrl(String url) { this.url = url; }
 
-    public String getDesc() { return Desc;}
+     String getDesc() { return Desc;}
 
     public void setDesc(String Desc) { this.Desc = Desc; }
 
@@ -45,7 +58,7 @@ public class Model_Class
         this.name = name;
     }
 
-    public String getPhone_no() {
+    String getPhone_no() {
         return phone_no;
     }
 

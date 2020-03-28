@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cart"></activity>
+        <activity android:name=".ItemDisplay"></activity>
+        <activity android:name=".Cart" />
         <activity android:name=".Profile" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -25,10 +26,10 @@
         <activity android:name=".upload_Clothes_page" />
         <activity android:name=".Sell_clothes_page" />
         <activity android:name=".rentpagerecyclerviewAdapter" />
-        <activity android:name=".buyonrentpage" />
-        <activity android:name=".first_page" />
+        <activity android:name=".buy_page" />
+        <activity android:name=".Home_Page" />
         <activity android:name=".signup" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Login_Page" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

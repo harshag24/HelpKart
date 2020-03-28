@@ -38,7 +38,7 @@ DatabaseReference databaseReference;
                 if (firebaseUser != null) {
                     getUserName();
                 } else {
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    Intent intent = new Intent(SplashScreen.this, Login_Page.class);
                     finish();
                     startActivity(intent);
                 }
@@ -53,7 +53,7 @@ DatabaseReference databaseReference;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-                Intent intent = new Intent(SplashScreen.this, first_page.class);
+                Intent intent = new Intent(SplashScreen.this, Home_Page.class);
                 intent.putExtra("Name", name);
                 finish();
                 startActivity(intent);

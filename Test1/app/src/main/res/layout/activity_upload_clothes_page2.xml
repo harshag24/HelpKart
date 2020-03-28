@@ -11,8 +11,10 @@
         android:id="@+id/imageView4"
         android:layout_width="188dp"
         android:layout_height="140dp"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="108dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="115dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/symbol_help" />
@@ -21,14 +23,14 @@
         android:id="@+id/textView8"
         android:layout_width="186dp"
         android:layout_height="38dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="113dp"
         android:text="Upload Image"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -36,30 +38,35 @@
         android:id="@+id/selectedpic_imageview"
         android:layout_width="243dp"
         android:layout_height="238dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextTopage3_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectpic_button" />
 
     <Button
         android:id="@+id/selectpic_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="144dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="116dp"
         android:text="Select from gallery"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
         android:id="@+id/nextTopage3_button"
         android:layout_width="119dp"
         android:layout_height="53dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="96dp"
-        android:text="Next"
+        android:layout_marginStart="149dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="104dp"
+        android:text="Submit"
         android:textColor="#03A9F4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

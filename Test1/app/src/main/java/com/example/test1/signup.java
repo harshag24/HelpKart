@@ -93,7 +93,7 @@ public class signup extends AppCompatActivity {
 
 
     public void openhomepage() {
-        final Intent intent = new Intent(signup.this, first_page.class);
+        final Intent intent = new Intent(signup.this, Home_Page.class);
         finish();
         startActivity(intent);
     }

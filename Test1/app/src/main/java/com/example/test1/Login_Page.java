@@ -3,16 +3,12 @@ package com.example.test1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Process;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.*;
 
 import com.google.android.gms.ads.MobileAds;
@@ -30,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class Login_Page extends AppCompatActivity {
     Button login, signup;
     EditText username, passw;
     String email, password;
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
@@ -81,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, signup.class);
+                Intent intent = new Intent(Login_Page.this, signup.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 reset_pass_dialog exampleDialog = new reset_pass_dialog();
                 exampleDialog.show(getSupportFragmentManager(), "reset dialog");
-                //Toast.makeText(MainActivity.this , "Reset link sent!!" , Toast.LENGTH_SHORT);
+                //Toast.makeText(Login_Page.this , "Reset link sent!!" , Toast.LENGTH_SHORT);
             }
         });
     }
@@ -107,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Log.w("MSG", "signInWithEmail:failure", task.getException());
                             progressDialog.dismiss();
-                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login_Page.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -133,17 +129,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
-                Intent intent = new Intent(MainActivity.this, first_page.class);
+                Intent intent = new Intent(Login_Page.this, Home_Page.class);
 
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login_Page.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                 finish();
                 startActivity(intent);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MainActivity.this, "Client doesn't have permission to read from that database reference.", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login_Page.this, "Client doesn't have permission to read from that database reference.", Toast.LENGTH_LONG).show();
             }
         });
 

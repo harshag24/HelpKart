@@ -21,12 +21,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,7 +42,7 @@ public class upload_clothes_page2 extends AppCompatActivity {
     FirebaseUser user;
     DatabaseReference databaseReference  , databaseReference1;
     StorageReference Ref;
-    String Brand , Desc , timeUsed;
+    String Brand , Desc , timeUsed , price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +53,7 @@ public class upload_clothes_page2 extends AppCompatActivity {
         Brand =  bundle.getString("Brand");
         Desc = bundle.getString("Desc");
         timeUsed = bundle.getString("timeUsed");
+        price = bundle.getString("price");
 
         mStorageRef= FirebaseStorage.getInstance().getReference("Images");
         progressDialog = new ProgressDialog(this);
@@ -110,7 +109,7 @@ public class upload_clothes_page2 extends AppCompatActivity {
                         Toast.makeText(upload_clothes_page2.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
                         addSeller();
                         progressDialog.dismiss();
-                        Intent intent = new Intent(upload_clothes_page2.this , first_page.class);
+                        Intent intent = new Intent(upload_clothes_page2.this , Home_Page.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("EXIT", true);
                         finish();
