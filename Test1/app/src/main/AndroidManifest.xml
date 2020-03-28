@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Cart"></activity>
+        <activity android:name=".Profile" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,11 +26,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class first_page extends AppCompatActivity {
 
-    Button buyrent, doantebutt, sellbut , logout , profile_button;
+    Button buyrent, doantebutt, logout ;
     TextView namedisp;
     private AdView mAdView;
     FirebaseUser user;
     DatabaseReference databaseReference;
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +40,15 @@ public class first_page extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         buyrent = findViewById(R.id.rentbutton);
         doantebutt = findViewById(R.id.donatebutton);
-        sellbut = findViewById(R.id.buttonsell);
+
         namedisp = findViewById(R.id.namedisplay);
         logout = findViewById(R.id.logout_button);
-        profile_button = findViewById(R.id.profile_button);
+
+
+        navigation = findViewById(R.id.bottomNavigationView);
+        navigation.getMenu().findItem(R.id.bottomnav_home).setChecked(true);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
@@ -55,9 +63,6 @@ public class first_page extends AppCompatActivity {
             }
         });
 
-
-
-
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         buyrent.setOnClickListener(new View.OnClickListener() {
@@ -68,20 +73,7 @@ public class first_page extends AppCompatActivity {
             }
         });
 
-        sellbut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(first_page.this, Sell_clothes_page.class);
-                startActivity(intent);
-            }
-        });
 
-        profile_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(first_page.this , Profile.class));
-            }
-        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,5 +87,32 @@ public class first_page extends AppCompatActivity {
             }
         });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.bottomnav_home:
+                    break;
+                case R.id.bottomnav_profile:
+                    Intent intent = new Intent(first_page.this , Profile.class);
+                    finish();
+                    startActivity(intent);
+                    break;
+                case R.id.bottomnav_sell:
+                    Intent intent1 = new Intent(first_page.this , Sell_clothes_page.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.bottomnav_cart:
+                    Intent intent2 = new Intent(first_page.this , Cart.class);
+                    startActivity(intent2);
+                    break;
+            }
+            return false;
+        }
+    };
 
 }

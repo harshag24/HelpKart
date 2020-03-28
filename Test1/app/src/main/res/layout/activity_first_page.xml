@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,16 +9,19 @@
 
     <Button
         android:id="@+id/rentbutton"
-        android:layout_width="144dp"
-        android:layout_height="47dp"
-        android:layout_above="@+id/buttonsell"
+        android:layout_width="338dp"
+        android:layout_height="49dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="28dp"
         android:layout_toStartOf="@+id/donatebutton"
         android:background="@android:color/holo_blue_light"
-        android:text="Buy on Rent" />
+        android:text="Buy on Rent"
+        app:layout_constraintBottom_toTopOf="@+id/donatebutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/logo"
@@ -27,49 +30,48 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="119dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="133dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/symbol_help" />
 
     <TextView
         android:id="@+id/namedisplay"
-        android:text="username"
         android:layout_width="232dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/logo"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="265dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="91dp"
+        android:text="username"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcometext" />
 
     <Button
         android:id="@+id/donatebutton"
-        android:layout_width="156dp"
-        android:layout_height="47dp"
-        android:layout_above="@+id/buttonsell"
+        android:layout_width="340dp"
+        android:layout_height="54dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="48dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Donate " />
-
-    <Button
-        android:id="@+id/buttonsell"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/logout_button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/holo_blue_light"
-        android:text="Want to Sell?" />
+        android:text="Donate "
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/welcometext"
@@ -77,49 +79,66 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="218dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="145dp"
         android:text="Welcome"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginStart="143dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="32dp"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-8289310155715439/1097496429"></com.google.android.gms.ads.AdView>
+        app:adUnitId="ca-app-pub-8289310155715439/1097496429"
+        app:layout_constraintBottom_toTopOf="@+id/logout_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/profile_button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/holo_blue_light"
-        android:text="Logout" />
 
-    <Button
-        android:id="@+id/profile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/adView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="48dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Profile" />
-</RelativeLayout>
+        android:text="Logout"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemBackground="?selectableItemBackgroundBorderless"
+        app:itemHorizontalTranslationEnabled="true"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
+</androidx.constraintlayout.widget.ConstraintLayout>

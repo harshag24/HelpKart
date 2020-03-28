@@ -139,4 +139,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView_profile"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        app:itemHorizontalTranslationEnabled="true"
+        app:itemBackground="?selectableItemBackgroundBorderless"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color"
+        app:menu="@menu/bottom_menu"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

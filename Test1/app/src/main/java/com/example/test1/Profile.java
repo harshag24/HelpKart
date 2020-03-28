@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +35,7 @@ public class Profile extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     DatabaseReference databaseReference , databaseReference_sellers;
-
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,10 @@ public class Profile extends AppCompatActivity {
         name = findViewById(R.id.profile_name_field);
         email = findViewById(R.id.profile_email_field);
         phone = findViewById(R.id.profile_phone_field);
+
+        navigation = findViewById(R.id.bottomNavigationView_profile);
+        navigation.getMenu().findItem(R.id.bottomnav_profile).setChecked(true);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -137,4 +143,33 @@ public class Profile extends AppCompatActivity {
         });
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.bottomnav_home:
+                    Intent intent = new Intent(Profile.this , first_page.class);
+                    finish();
+                    startActivity(intent);
+                    break;
+                case R.id.bottomnav_profile:
+                    break;
+                case R.id.bottomnav_cart:
+                    Intent intent1 = new Intent(Profile.this , Cart.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.bottomnav_sell:
+                    Intent intent2 = new Intent(Profile.this , Sell_clothes_page.class);
+                    startActivity(intent2);
+                    break;
+
+            }
+            return false;
+        }
+    };
+
 }
