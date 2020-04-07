@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class signup extends AppCompatActivity {
     private static final String TAG = "Msg:";
     Button signup2;
@@ -84,11 +86,11 @@ public class signup extends AppCompatActivity {
     public void saveUserInfo()
     {
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        Model_Class modelClass = new Model_Class(nameInput,phoneInput);
-        databaseReference.child(user.getUid()).setValue(modelClass);
+        HashMap<String, Object> add_user = new HashMap<>();
+        add_user.put("name" , nameInput );
+        add_user.put("phone_no" , phoneInput);
+        add_user.put("isSeller" , "false");
+        databaseReference.updateChildren(add_user);
     }
 
 

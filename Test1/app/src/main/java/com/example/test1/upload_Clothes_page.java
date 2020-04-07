@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class upload_Clothes_page extends AppCompatActivity {
-EditText brand , timeUsed ,desc;
+EditText brand , timeUsed ,desc , price;
     Button next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ EditText brand , timeUsed ,desc;
     next = findViewById(R.id.nextTopage2_button);
     timeUsed  = findViewById(R.id.timeUsed);
     desc= findViewById(R.id.desc);
+    price = findViewById(R.id.price);
 
         next.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -29,11 +30,14 @@ EditText brand , timeUsed ,desc;
             String brand_input = brand.getText().toString().trim();
             String timeUsed_input = timeUsed.getText().toString().trim();
             String desc_input = desc.getText().toString().trim();
-            if (checkIfEmpty(brand_input , timeUsed_input , desc_input)) {
+            String price_input = price.getText().toString().trim();
+
+            if (checkIfEmpty(brand_input , timeUsed_input , desc_input , price_input)) {
                 Intent intent = new Intent(upload_Clothes_page.this, upload_clothes_page2.class);
                 intent.putExtra("Brand", brand_input);
                 intent.putExtra("timeUsed", timeUsed_input);
                 intent.putExtra("Desc", desc_input);
+                intent.putExtra("price" , price_input);
                 startActivity(intent);
             }
             else{
@@ -44,8 +48,8 @@ EditText brand , timeUsed ,desc;
 
     }
 
-    private boolean checkIfEmpty(String brand_input, String timeUsed_input, String desc_input) {
-        return !brand_input.isEmpty() && !timeUsed_input.isEmpty() && !desc_input.isEmpty();
+    private boolean checkIfEmpty(String brand_input, String timeUsed_input, String desc_input , String price_input) {
+        return !brand_input.isEmpty() && !timeUsed_input.isEmpty() && !desc_input.isEmpty() && !price_input.isEmpty();
     }
 
 }

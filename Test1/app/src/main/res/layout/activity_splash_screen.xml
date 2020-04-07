@@ -24,7 +24,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="30dp"
-        android:text="A place to help"
+        android:text="A place to share!!"
         android:textAlignment="center"
         android:textColor="#5FB4EB"
         android:textSize="25sp"
@@ -44,7 +44,7 @@
         android:textColor="#5FB4EB"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

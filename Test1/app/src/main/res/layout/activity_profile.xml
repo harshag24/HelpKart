@@ -47,13 +47,14 @@
         android:layout_width="262dp"
         android:layout_height="44dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="9dp"
         android:ems="10"
 
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toEndOf="@+id/name_field"
         app:layout_constraintTop_toBottomOf="@+id/profile_header" />
 

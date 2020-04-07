@@ -30,6 +30,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class upload_clothes_page2 extends AppCompatActivity {
@@ -40,9 +43,9 @@ public class upload_clothes_page2 extends AppCompatActivity {
     StorageReference mStorageRef;
     Uri selectedImage;
     FirebaseUser user;
-    DatabaseReference databaseReference  , databaseReference1;
+    DatabaseReference databaseReference , databaseReference1;
     StorageReference Ref;
-    String Brand , Desc , timeUsed , price;
+    String Brand , Desc , timeUsed , price ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +54,17 @@ public class upload_clothes_page2 extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         Brand =  bundle.getString("Brand");
-        Desc = bundle.getString("Desc");
         timeUsed = bundle.getString("timeUsed");
+        Desc = bundle.getString("Desc");
         price = bundle.getString("price");
+
 
         mStorageRef= FirebaseStorage.getInstance().getReference("Images");
         progressDialog = new ProgressDialog(this);
         selectedpic = findViewById(R.id.selectedpic_imageview);
         choosepic = findViewById(R.id.selectpic_button);
         next = findViewById(R.id.nextTopage3_button);
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         mStorageRef=FirebaseStorage.getInstance().getReference();
         choosepic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +111,13 @@ public class upload_clothes_page2 extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(upload_clothes_page2.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
+
+                        Log.e("TAG", "onClick: "+user.getUid() );
+                        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+                        HashMap<String, Object> update_user = new HashMap<>();
+                        update_user.put("isSeller" , "true");
+                        databaseReference1.updateChildren(update_user);
+
                         addSeller();
                         progressDialog.dismiss();
                         Intent intent = new Intent(upload_clothes_page2.this , Home_Page.class);
@@ -122,7 +133,6 @@ public class upload_clothes_page2 extends AppCompatActivity {
                         Toast.makeText(upload_clothes_page2.this,"Upload Unsuccessful!! Please Try Again ",Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 
     public void addSeller()
@@ -131,26 +141,24 @@ public class upload_clothes_page2 extends AppCompatActivity {
             @Override
             public void onSuccess(final Uri uri) {
                 Log.d("TAG", String.valueOf(uri));
-                user = FirebaseAuth.getInstance().getCurrentUser();
-                databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString().trim();
-                        String phone = Objects.requireNonNull(dataSnapshot.child("phone_no").getValue()).toString().trim();
-                        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Seller");
-                        String url = String.valueOf(uri);
-                        Model_Class modelClass = new Model_Class(name,phone,Brand,timeUsed,Desc,url);
-                        databaseReference1.child(user.getUid()).setValue(modelClass);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        System.out.println("User Transaction Cancelled");
-                    }
-                });
 
+
+                String url = String.valueOf(uri);
+                String  current_date;
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS");
+                current_date = simpleDateFormat.format(calendar.getTime());
+
+                HashMap<String, Object> add_product = new HashMap<>();
+                add_product.put("brand" , Brand );
+                add_product.put("desc" , Desc);
+                add_product.put("timeUsed" , timeUsed);
+                add_product.put("price" , price);
+                add_product.put("url" , url);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("Products").child(user.getUid()).child(current_date);
+                databaseReference.updateChildren(add_product);
             }
         });
-
 }
 }

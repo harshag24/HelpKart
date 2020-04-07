@@ -34,7 +34,7 @@ public class Profile extends AppCompatActivity {
     TextView reset;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
-    DatabaseReference databaseReference , databaseReference_sellers;
+    DatabaseReference databaseReference ;
     BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,6 @@ public class Profile extends AppCompatActivity {
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference_sellers = FirebaseDatabase.getInstance().getReference().child("Seller").child(user.getUid());
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,15 +109,7 @@ public class Profile extends AppCompatActivity {
                         }
                     });
 
-            databaseReference_sellers.child("name").setValue(username);
-            databaseReference_sellers.child("phone_no").setValue(userphone)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(Profile.this , "Successfully Updated" , Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    });
+
 
             }
         });

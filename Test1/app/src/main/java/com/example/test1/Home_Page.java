@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class Home_Page extends AppCompatActivity {
 
-    Button buyrent, doantebutt, logout ;
+    Button buyrent, logout ;
     TextView namedisp;
     FirebaseUser user;
     DatabaseReference databaseReference , databaseReference_cart;
@@ -42,7 +42,7 @@ public class Home_Page extends AppCompatActivity {
         mAdView.loadAd(adRequest);
 
         buyrent = findViewById(R.id.rentbutton);
-        doantebutt = findViewById(R.id.donatebutton);
+
 
         namedisp = findViewById(R.id.namedisplay);
         logout = findViewById(R.id.logout_button);

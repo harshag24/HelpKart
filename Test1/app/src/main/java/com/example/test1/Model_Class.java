@@ -3,52 +3,35 @@ package com.example.test1;
 
 public class Model_Class
 {
-    private String name , phone_no , Brand , timeUsed , Desc , url , email;
+    private String name , phone_no , brand , timeUsed , desc , url , email ,price , isSeller;
 
-    Model_Class()
-    {
+    public Model_Class(String isSeller) {
+        this.isSeller = isSeller;
     }
 
-    public Model_Class(String email) {
-        this.email = email;
-    }
-
-    Model_Class(String name, String phone_no, String Brand, String timeUsed, String Desc, String url)
-    {   this.name = name;
+    public Model_Class(String name, String phone_no) {
+        this.name = name;
         this.phone_no = phone_no;
-        this.Brand = Brand;
+    }
+
+
+    public Model_Class(String name, String phone_no, String brand, String timeUsed, String desc, String url, String price) {
+        this.name = name;
+        this.phone_no = phone_no;
+        this.brand = brand;
         this.timeUsed = timeUsed;
-        this.Desc = Desc;
-        this.url = url; }
-
-    Model_Class(String name, String phone_no)
-    { this.name = name;
-    this.phone_no = phone_no; }
-
-
-    public String getEmail() {
-        return email;
+        this.desc = desc;
+        this.url = url;
+        this.price = price;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public Model_Class() {
     }
 
-    String getBrand() { return Brand; }
 
-    public void setBrand(String Brand) { this.Brand = Brand; }
+    public String getIsSeller() { return isSeller; }
 
-    String getTimeUsed() { return timeUsed; }
-
-    public void setTimeUsed(String timeUsed) { this.timeUsed = timeUsed; }
-
-   String getUrl() { return url; }
-
-    public void setUrl(String url) { this.url = url; }
-
-     String getDesc() { return Desc;}
-
-    public void setDesc(String Desc) { this.Desc = Desc; }
+    public void setIsSeller(String isSeller) { this.isSeller = isSeller; }
 
     public String getName() {
         return name;
@@ -58,11 +41,59 @@ public class Model_Class
         this.name = name;
     }
 
-    String getPhone_no() {
+    public String getPhone_no() {
         return phone_no;
     }
 
     public void setPhone_no(String phone_no) {
         this.phone_no = phone_no;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getTimeUsed() {
+        return timeUsed;
+    }
+
+    public void setTimeUsed(String timeUsed) {
+        this.timeUsed = timeUsed;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

@@ -23,22 +23,6 @@
             />
 
         <TextView
-            android:id="@+id/name_seller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seller"
-            android:textColor="#000"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/phone_seller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="No Phone Number"
-            android:textColor="#000"
-            android:textSize="22sp" />
-        <TextView
             android:id="@+id/brand_seller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +33,15 @@
             />
 
         <TextView
+            android:id="@+id/price_seller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="Price"
+            android:textColor="#000"
+            android:textSize="22sp"
+            />
+        <TextView
             android:id="@+id/timeUsed_seller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,15 +50,7 @@
             android:textColor="#000"
             android:textSize="22sp"
             />
-        <TextView
-            android:id="@+id/desc_seller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="Description"
-            android:textColor="#000"
-            android:textSize="22sp"
-            />
+
 </LinearLayout>
 
 

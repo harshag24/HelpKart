@@ -19,10 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ItemDisplay extends AppCompatActivity {
-    TextView name , phone , desc;
+    TextView name , phone , desc , price;
     ImageView image;
     Button add_to_cart;
     DatabaseReference databaseReference;
@@ -37,26 +38,33 @@ public class ItemDisplay extends AppCompatActivity {
         phone = findViewById(R.id.phone_disp);
         desc = findViewById(R.id.desc_disp);
         image = findViewById(R.id.image_disp);
-        String user_id =  getIntent().getStringExtra("user");
-        assert user_id != null;
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Seller").child(user_id);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String username = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString().trim();
-               String userphone = Objects.requireNonNull(dataSnapshot.child("phone_no").getValue()).toString().trim();
-               String userdesc = Objects.requireNonNull(dataSnapshot.child("desc").getValue()).toString().trim();
-               String url = Objects.requireNonNull(dataSnapshot.child("url").getValue()).toString().trim();
-               name.setText(username);
-               phone.setText(userphone);
-               desc.setText(userdesc);
-               Picasso.get().load(url).into(image);
-           }
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
+        price = findViewById(R.id.price_disp);
 
-           }
-       });
+        final String parent_key = getIntent().getStringExtra("parent");
+        final String userdesc = getIntent().getStringExtra("description");
+        final String url = getIntent().getStringExtra("url");
+        final String userprice = getIntent().getStringExtra("price");
+
+        desc.setText("Description - "+userdesc);
+        Picasso.get().load(url).into(image);
+
+        assert parent_key != null;
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(parent_key);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String username = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+                String userphone = Objects.requireNonNull(dataSnapshot.child("phone_no").getValue()).toString();
+                name.setText("Name - "+username);
+                phone.setText("Phone Number - "+userphone);
+                price.setText("Price - "+userprice);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
