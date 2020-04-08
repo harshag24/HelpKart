@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +28,8 @@ public class ItemDisplay extends AppCompatActivity {
     TextView name , phone , desc , price;
     ImageView image;
     Button add_to_cart;
-    DatabaseReference databaseReference;
+    FirebaseUser user;
+    DatabaseReference databaseReference , databaseReference1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +43,17 @@ public class ItemDisplay extends AppCompatActivity {
         image = findViewById(R.id.image_disp);
         price = findViewById(R.id.price_disp);
 
-        final String parent_key = getIntent().getStringExtra("parent");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String parent_key = getIntent().getStringExtra("parent_key");
         final String userdesc = getIntent().getStringExtra("description");
         final String url = getIntent().getStringExtra("url");
         final String userprice = getIntent().getStringExtra("price");
+        final String product_id = getIntent().getStringExtra("product_id");
+        final String userbrand = getIntent().getStringExtra("brand");
+        final String usertimeUsed = getIntent().getStringExtra("timeUsed");
 
-        desc.setText("Description - "+userdesc);
-        Picasso.get().load(url).into(image);
+
 
         assert parent_key != null;
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(parent_key);
@@ -58,6 +65,8 @@ public class ItemDisplay extends AppCompatActivity {
                 name.setText("Name - "+username);
                 phone.setText("Phone Number - "+userphone);
                 price.setText("Price - "+userprice);
+                desc.setText("Description - "+userdesc);
+                Picasso.get().load(url).into(image);
             }
 
             @Override
@@ -66,6 +75,34 @@ public class ItemDisplay extends AppCompatActivity {
             }
         });
 
+        add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assert product_id != null;
+                databaseReference1 = FirebaseDatabase.getInstance().getReference("User_Cart")
+                        .child(user.getUid())
+                        .child(parent_key)
+                        .child(product_id);
+
+                HashMap<String, Object> add_product = new HashMap<>();
+                add_product.put("brand" , userbrand);
+                add_product.put("desc" , userdesc);
+                add_product.put("price" , userprice);
+                add_product.put("timeUsed" , usertimeUsed);
+                add_product.put("url" , url);
+
+                databaseReference1.updateChildren(add_product)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Snackbar.make( findViewById(R.id.ItemDisplayLayout), "Added to Cart" , Snackbar.LENGTH_LONG).show();
+                            }
+                        });
+
+            }
+        });
+
     }
+
 
 }

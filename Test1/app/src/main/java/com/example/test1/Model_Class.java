@@ -3,10 +3,10 @@ package com.example.test1;
 
 public class Model_Class
 {
-    private String name , phone_no , brand , timeUsed , desc , url , email ,price , isSeller;
+    private String name , phone_no , brand , timeUsed , desc , url , email ,price ;
 
-    public Model_Class(String isSeller) {
-        this.isSeller = isSeller;
+    public Model_Class(String email) {
+        this.email = email;
     }
 
     public Model_Class(String name, String phone_no) {
@@ -28,10 +28,6 @@ public class Model_Class
     public Model_Class() {
     }
 
-
-    public String getIsSeller() { return isSeller; }
-
-    public void setIsSeller(String isSeller) { this.isSeller = isSeller; }
 
     public String getName() {
         return name;

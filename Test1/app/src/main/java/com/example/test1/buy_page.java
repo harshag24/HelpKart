@@ -85,10 +85,14 @@ public class buy_page extends AppCompatActivity {
 
                                 Intent intent = new Intent(buy_page.this,ItemDisplay.class);
 
-                                intent.putExtra("parent",key);
+                                intent.putExtra("parent_key",key);
                                 intent.putExtra("description",model.getDesc());
                                 intent.putExtra("url",model.getUrl());
                                 intent.putExtra("price",model.getPrice());
+                                intent.putExtra("product_id",product_id);
+                                intent.putExtra("brand",model.getBrand());
+                                intent.putExtra("timeUsed",model.getTimeUsed());
+
 
                                 startActivity(intent);
                             }

@@ -26,6 +26,7 @@ public class signup extends AppCompatActivity {
     EditText name, email, pass, phone;
     String emailInput, passwordInput, nameInput,phoneInput;
     private FirebaseAuth mAuth;
+    FirebaseUser user;
     ProgressDialog progressDialog;
     DatabaseReference databaseReference;
     @Override
@@ -86,11 +87,12 @@ public class signup extends AppCompatActivity {
     public void saveUserInfo()
     {
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
+        user = FirebaseAuth.getInstance().getCurrentUser();
         HashMap<String, Object> add_user = new HashMap<>();
         add_user.put("name" , nameInput );
         add_user.put("phone_no" , phoneInput);
         add_user.put("isSeller" , "false");
-        databaseReference.updateChildren(add_user);
+        databaseReference.child(user.getUid()).updateChildren(add_user);
     }
 
 

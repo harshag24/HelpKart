@@ -28,7 +28,7 @@ public class Home_Page extends AppCompatActivity {
     Button buyrent, logout ;
     TextView namedisp;
     FirebaseUser user;
-    DatabaseReference databaseReference , databaseReference_cart;
+    DatabaseReference databaseReference ;
     BottomNavigationView navigation;
     private AdView mAdView;
     @Override
@@ -60,9 +60,7 @@ public class Home_Page extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String dispname = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString().trim();
                 namedisp.setText(dispname);
-                databaseReference_cart = FirebaseDatabase.getInstance().getReference().child("User_Cart");
-                Model_Class modelClass = new Model_Class(user.getEmail());
-                databaseReference_cart.child(user.getUid()).setValue(modelClass);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
