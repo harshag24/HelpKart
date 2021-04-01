@@ -48,7 +48,7 @@ public class buy_page extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String key = dataSnapshot1.getKey();
                     showData(key );
-                    Log.e("TAG", "onCreate: key :" + key);
+                    Log.v("TAG", "onCreate: key :" + key);
                 }
             }
 
